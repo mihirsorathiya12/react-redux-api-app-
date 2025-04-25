@@ -36,7 +36,7 @@ export const deletePostAPI = async (id) => {
     throw new Error("Failed to delete post");
   }
 
-  return id; // returning ID to update Redux store
+  return id;
 };
 
 // UPDATE post
