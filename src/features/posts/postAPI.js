@@ -1,50 +1,57 @@
-import axios from "axios";
-
 const BASE_URL = "https://jsonplaceholder.typicode.com/posts";
 
-// axios Posts
+// GET all posts
 export const fetchPostsAPI = async () => {
-  try {
-    const response = await axios.get(BASE_URL);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    throw error;
+  const response = await fetch(BASE_URL);
+  if (!response.ok) {
+    throw new Error("Failed to fetch posts");
   }
+  return await response.json();
 };
 
-// Add Post
-export const addPostAPI = async (newPost) => {
-  try {
-    const response = await axios.post(BASE_URL, newPost);
-    return response.data;
-  } catch (error) {
-    console.error("Error adding post:", error);
-    throw error;
+// ADD new post
+export const addPostAPI = async (post) => {
+  const response = await fetch(BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(post),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add post");
   }
+
+  return await response.json();
 };
 
-// Update Post
-export const updatePostAPI = async (updatedPost) => {
-  try {
-    const response = await axios.put(
-      `${BASE_URL}/${updatedPost.id}`,
-      updatedPost
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error updating post:", error);
-    throw error;
+// DELETE post
+export const deletePostAPI = async (id) => {
+  const response = await fetch(`${BASE_URL}/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete post");
   }
+
+  return id; // returning ID to update Redux store
 };
 
-// Delete Post
-export const deletePostAPI = async (postId) => {
-  try {
-    await axios.delete(`${BASE_URL}/${postId}`);
-    return postId;
-  } catch (error) {
-    console.error("Error deleting post:", error);
-    throw error;
+// UPDATE post
+export const updatePostAPI = async (post) => {
+  const response = await fetch(`${BASE_URL}/${post.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(post),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update post");
   }
+
+  return await response.json();
 };
