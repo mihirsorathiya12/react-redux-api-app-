@@ -38,7 +38,7 @@ const PostForm = ({
 
   const onDelete = () => {
     if (postToEdit && postToEdit.id) {
-      handleDelete(postToEdit.id); // Assuming the delete action takes post id
+      handleDelete(postToEdit.id); 
       handleClose();
     }
   };

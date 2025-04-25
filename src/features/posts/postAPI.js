@@ -2,14 +2,14 @@ import axios from "axios";
 
 const BASE_URL = "https://jsonplaceholder.typicode.com/posts";
 
-// Fetch Posts
+// axios Posts
 export const fetchPostsAPI = async () => {
   try {
     const response = await axios.get(BASE_URL);
-    return response.data; // Return data if request is successful
+    return response.data;
   } catch (error) {
-    console.error("Error fetching posts:", error); // Log error
-    throw error; // Throw error for Redux to handle
+    console.error("Error fetching posts:", error);
+    throw error;
   }
 };
 
@@ -17,10 +17,10 @@ export const fetchPostsAPI = async () => {
 export const addPostAPI = async (newPost) => {
   try {
     const response = await axios.post(BASE_URL, newPost);
-    return response.data; // Return data if request is successful
+    return response.data;
   } catch (error) {
-    console.error("Error adding post:", error); // Log error
-    throw error; // Throw error for Redux to handle
+    console.error("Error adding post:", error);
+    throw error;
   }
 };
 
@@ -31,10 +31,10 @@ export const updatePostAPI = async (updatedPost) => {
       `${BASE_URL}/${updatedPost.id}`,
       updatedPost
     );
-    return response.data; // Return data if request is successful
+    return response.data;
   } catch (error) {
-    console.error("Error updating post:", error); // Log error
-    throw error; // Throw error for Redux to handle
+    console.error("Error updating post:", error);
+    throw error;
   }
 };
 
@@ -42,9 +42,9 @@ export const updatePostAPI = async (updatedPost) => {
 export const deletePostAPI = async (postId) => {
   try {
     await axios.delete(`${BASE_URL}/${postId}`);
-    return postId; // Return postId after deletion is successful
+    return postId;
   } catch (error) {
-    console.error("Error deleting post:", error); // Log error
-    throw error; // Throw error for Redux to handle
+    console.error("Error deleting post:", error);
+    throw error;
   }
 };
